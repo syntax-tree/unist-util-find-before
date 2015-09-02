@@ -1,0 +1,23 @@
+{
+  "name": "unist-util-find-before",
+  "version": "0.0.0",
+  "description": "Utility to find a node before another node",
+  "license": "MIT",
+  "keywords": [
+    "unist",
+    "mdast",
+    "markdown",
+    "retext",
+    "natural",
+    "language",
+    "node",
+    "find",
+    "before",
+    "util",
+    "utility"
+  ],
+  "repository": "wooorm/unist-util-find-before",
+  "scripts": [
+    "index.js"
+  ]
+}
