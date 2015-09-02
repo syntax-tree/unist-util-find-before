@@ -1,6 +1,6 @@
 {
   "name": "unist-util-find-before",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Utility to find a node before another node",
   "license": "MIT",
   "keywords": [
