@@ -75,30 +75,10 @@ given).
 
 *   `index` (`number`) — Position of child to search before;
 
-*   `test` ([`Function`](#function-testnode-index-parent), `string`, or
-    `Node`, optional)
-    — Invoked for each preceding child of `parent` before `node` or `position`.
-    When `test` returns truthy for the first time on a `child`, that `child` is
-    returned.
-
-    Passing a `string` is equal to passing
-    `function (node) {return node.type === test}`.
-
-    Passing a `node` is equal to passing
-    `function (node) {return node === test}`, useful when checking if `test`
-    comes before `index` or `node` in `parent`.
+*   `test` (`Function`, `string`, or `Node`; optional)
+    — See [`is()`](https://github.com/wooorm/unist-util-is#istest-node-index-parent-context).
 
 **Returns**: `node?`, when found. Child node of `parent` which passes `test`.
-
-### function test(node, index, parent)
-
-**Parameters**:
-
-*   `node` (`Node`) — Node to test;
-*   `index` (`number`) — Position of `node` in `parent`.
-*   `parent` (`Node`) — Parent of `node`.
-
-**Returns**: `boolean?`, whether this iteration passes.
 
 ## License
 

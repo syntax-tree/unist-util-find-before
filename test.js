@@ -80,15 +80,19 @@ describe('unist-util-find-before', function () {
         assert.throws(function () {
             findBefore({
                 'type': 'foo',
-                'children': []
-            }, 0, false);
+                'children': [{
+                    'type': 'bar'
+                }]
+            }, 1, false);
         }, /Expected function, string, or node as test/);
 
         assert.throws(function () {
             findBefore({
                 'type': 'foo',
-                'children': []
-            }, 0, true);
+                'children': [{
+                    'type': 'bar'
+                }]
+            }, 1, true);
         }, /Expected function, string, or node as test/);
     });
 
