@@ -1,85 +1,76 @@
-# unist-util-find-before [![Build Status](https://img.shields.io/travis/wooorm/unist-util-find-before.svg)](https://travis-ci.org/wooorm/unist-util-find-before) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/unist-util-find-before.svg)](https://codecov.io/github/wooorm/unist-util-find-before?branch=master)
+# unist-util-find-before [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-[**Unist**](https://github.com/wooorm/unist) utility to find a node before
-another node. Useful when working with [**mdast**](https://github.com/wooorm/mdast)
-or [**retext**](https://github.com/wooorm/retext).
+[**Unist**][unist] utility to find a node before another node.
 
 ## Installation
 
-[npm](https://docs.npmjs.com/cli/install):
+[npm][]:
 
 ```bash
 npm install unist-util-find-before
 ```
 
-**unist-util-find-before** is also available for [bower](http://bower.io/#install-packages),
-[component](https://github.com/componentjs/component), and
-[duo](http://duojs.org/#getting-started), and as an AMD, CommonJS, and globals
-module, [uncompressed](unist-util-find-before.js) and
-[compressed](unist-util-find-before.min.js).
-
 ## Usage
 
 ```js
-var mdast = require('mdast');
+var remark = require('remark');
 var findBefore = require('unist-util-find-before');
-var inspect = require('unist-util-inspect');
 
-function log(node) {
-    console.log(node && inspect(node));
-}
+var tree = remark().parse('Some _emphasis_, **importance**, and `code`.');
+var paragraph = tree.children[0];
+var code = paragraph.children[paragraph.children.length - 1];
 
-mdast.use(function () {
-    return function (ast) {
-        var paragraph = ast.children[0];
-        var children = paragraph.children;
-
-        log(findBefore(paragraph, 4));
-        log(findBefore(paragraph, children[4]));
-        log(findBefore(paragraph, children[4], 'emphasis'));
-        log(findBefore(paragraph, children[4], children[5]));
-        log(findBefore(paragraph, children[4], function (node, n) {
-            return n === 1;
-        }));
-    };
-}).process('Some *emphasis*, **strongness**, and `code`.');
+console.log(findBefore(paragraph, code, 'emphasis'));
 ```
 
 Yields:
 
-```text
-strong[1]
-└─ text: 'strongness'
-strong[1]
-└─ text: 'strongness'
-emphasis[1]
-└─ text: 'emphasis'
-null
-emphasis[1]
-└─ text: 'emphasis'
+```js
+{ type: 'emphasis',
+  children: [ { type: 'text', value: 'emphasis' } ] }
 ```
 
 ## API
 
-### findBefore(parent, index|node\[, test\])
+### `findBefore(parent, node|index[, test])`
 
-Find the first child before `index` (or `node`), that passes `test` (when
-given).
+Find the first child before `index` (or `node`) in `parent`, that passes `test`
+(when given).
 
-**Parameters**:
+###### Parameters
 
-*   `parent` (`Node`) — Parent to search in;
+*   `parent` ([`Node`][node]) — Context node;
+*   `node` ([`Node`][node]) — Node in `parent`;
+*   `index` (`number`, optional) — Position of a `node` in `parent`;
+*   `test` (`Function`, `string`, or `Node`, optional)
+    — See [`unist-util-is`][is].
 
-*   `node` (`Node`)
-    — [Node](https://github.com/wooorm/unist#unist-nodes) to search before;
+###### Returns
 
-*   `index` (`number`) — Position of child to search before;
-
-*   `test` (`Function`, `string`, or `Node`; optional)
-    — See [`is()`](https://github.com/wooorm/unist-util-is#istest-node-index-parent-context).
-
-**Returns**: `node?`, when found. Child node of `parent` which passes `test`.
+[`Node?`][node] — Child node of `parent` passing `test`.
 
 ## License
 
-[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
+[MIT][license] © [Titus Wormer][author]
+
+<!-- Definitions -->
+
+[travis-badge]: https://img.shields.io/travis/wooorm/unist-util-find-before.svg
+
+[travis]: https://travis-ci.org/wooorm/unist-util-find-before
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/unist-util-find-before.svg
+
+[codecov]: https://codecov.io/github/wooorm/unist-util-find-before
+
+[npm]: https://docs.npmjs.com/cli/install
+
+[license]: LICENSE
+
+[author]: http://wooorm.com
+
+[unist]: https://github.com/wooorm/unist
+
+[node]: https://github.com/wooorm/unist#node
+
+[is]: https://github.com/wooorm/unist-util-is
