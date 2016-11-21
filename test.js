@@ -2,10 +2,10 @@
 
 var assert = require('assert');
 var test = require('tape');
-var mdast = require('mdast');
+var remark = require('remark');
 var findBefore = require('./');
 
-var tree = mdast.parse('Some *emphasis*, **importance**, and `code`.');
+var tree = remark().parse('Some *emphasis*, **importance**, and `code`.');
 var paragraph = tree.children[0];
 var children = paragraph.children;
 
@@ -63,7 +63,7 @@ test('unist-util-find-before', function (t) {
             children: [{type: 'bar'}]
           }, 1, false);
         },
-        /Expected function, string, or node as test/
+        /Expected function, string, or object as test/
       );
 
       assert.throws(
@@ -73,7 +73,7 @@ test('unist-util-find-before', function (t) {
             children: [{type: 'bar'}]
           }, 1, true);
         },
-        /Expected function, string, or node as test/
+        /Expected function, string, or object as test/
       );
     },
     'should fail for invalid `test`'
