@@ -5,3 +5,4 @@ coverage/
 node_modules/
 unist-util-find-before.js
 unist-util-find-before.min.js
+yarn.lock
