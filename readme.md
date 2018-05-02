@@ -13,14 +13,14 @@ npm install unist-util-find-before
 ## Usage
 
 ```js
-var remark = require('remark');
-var findBefore = require('unist-util-find-before');
+var remark = require('remark')
+var findBefore = require('unist-util-find-before')
 
-var tree = remark().parse('Some _emphasis_, **importance**, and `code`.');
-var paragraph = tree.children[0];
-var code = paragraph.children[paragraph.children.length - 1];
+var tree = remark().parse('Some _emphasis_, **importance**, and `code`.')
+var paragraph = tree.children[0]
+var code = paragraph.children[paragraph.children.length - 1]
 
-console.log(findBefore(paragraph, code, 'emphasis'));
+console.log(findBefore(paragraph, code, 'emphasis'))
 ```
 
 Yields:
