@@ -4,8 +4,6 @@ var is = require('unist-util-is')
 
 module.exports = findBefore
 
-/* Find a node before `index` in `parent` which passes
- * `test`. */
 function findBefore(parent, index, test) {
   var children
   var child
@@ -24,7 +22,7 @@ function findBefore(parent, index, test) {
     throw new Error('Expected positive finite index or child node')
   }
 
-  /* Performance. */
+  // Performance.
   if (index > children.length) {
     index = children.length
   }
