@@ -1,10 +1,11 @@
 'use strict'
 
-var is = require('unist-util-is')
+var convert = require('unist-util-is/convert')
 
 module.exports = findBefore
 
 function findBefore(parent, index, test) {
+  var is = convert(test)
   var children
   var child
 
@@ -30,7 +31,7 @@ function findBefore(parent, index, test) {
   while (index--) {
     child = children[index]
 
-    if (is(test, child, index, parent)) {
+    if (is(child, index, parent)) {
       return child
     }
   }
