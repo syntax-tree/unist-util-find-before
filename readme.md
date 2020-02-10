@@ -18,7 +18,7 @@
 npm install unist-util-find-before
 ```
 
-## Usage
+## Use
 
 ```js
 var u = require('unist-builder')
@@ -74,8 +74,21 @@ Find the first [child][] before `index` (or `node`) in `parent`, that passes
     — Find all nodes before another node
 *   [`unist-util-find-all-between`](https://github.com/mrzmmr/unist-util-find-all-between)
     — Find all nodes between two nodes
-*   [`unist-util-find`](https://github.com/blahah/unist-util-find)
-    — Find nodes matching a predicate
+*   [`unist-util-visit`](https://github.com/syntax-tree/unist-util-visit)
+    — Recursively walk over nodes
+*   [`unist-util-visit-parents`](https://github.com/syntax-tree/unist-util-visit-parents)
+    — Like `visit`, but with a stack of parents
+*   [`unist-util-filter`](https://github.com/eush77/unist-util-filter)
+    — Create a new tree with all nodes that pass a test
+*   [`unist-util-map`](https://github.com/syntax-tree/unist-util-map)
+    — Create a new tree with all nodes mapped by a given function
+*   [`unist-util-flatmap`](https://gitlab.com/staltz/unist-util-flatmap)
+    — Create a new tree by mapping (to an array) with the provided function and
+    then flattening
+*   [`unist-util-remove`](https://github.com/eush77/unist-util-remove)
+    — Remove nodes from a tree that pass a test
+*   [`unist-util-select`](https://github.com/eush77/unist-util-select)
+    — Select nodes with CSS-like selectors
 
 ## Contribute
 
@@ -115,7 +128,7 @@ abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/syntax-tree
 
