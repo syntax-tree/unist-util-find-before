@@ -6,33 +6,31 @@ module.exports = findBefore
 
 function findBefore(parent, index, test) {
   var is = convert(test)
-  var children
-  var child
 
   if (!parent || !parent.type || !parent.children) {
     throw new Error('Expected parent node')
   }
 
-  children = parent.children
+  if (typeof index === 'number') {
+    if (index < 0 || index === Infinity) {
+      throw new Error('Expected positive finite number as index')
+    }
+  } else {
+    index = parent.children.indexOf(index)
 
-  if (index && index.type) {
-    index = children.indexOf(index)
-  }
-
-  if (isNaN(index) || index < 0 || index === Infinity) {
-    throw new Error('Expected positive finite index or child node')
+    if (index < 0) {
+      throw new Error('Expected child node or index')
+    }
   }
 
   // Performance.
-  if (index > children.length) {
-    index = children.length
+  if (index > parent.children.length) {
+    index = parent.children.length
   }
 
   while (index--) {
-    child = children[index]
-
-    if (is(child, index, parent)) {
-      return child
+    if (is(parent.children[index], index, parent)) {
+      return parent.children[index]
     }
   }
 
