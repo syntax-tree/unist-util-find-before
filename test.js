@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('unist').Node} Node
+ */
+
 import test from 'tape'
 import remark from 'remark'
 import {findBefore} from './index.js'
@@ -9,6 +13,7 @@ var children = paragraph.children
 test('unist-util-find-before', function (t) {
   t.throws(
     function () {
+      // @ts-ignore runtime
       findBefore()
     },
     /Expected parent node/,
@@ -17,9 +22,8 @@ test('unist-util-find-before', function (t) {
 
   t.throws(
     function () {
-      findBefore({
-        type: 'foo'
-      })
+      // @ts-ignore runtime
+      findBefore({type: 'foo'})
     },
     /Expected parent node/,
     'should fail without parent node'
@@ -27,6 +31,7 @@ test('unist-util-find-before', function (t) {
 
   t.throws(
     function () {
+      // @ts-ignore runtime
       findBefore({type: 'foo', children: []})
     },
     /Expected child node or index/,
@@ -51,6 +56,7 @@ test('unist-util-find-before', function (t) {
 
   t.throws(
     function () {
+      // @ts-ignore runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, false)
     },
     /Expected function, string, or object as test/,
@@ -59,6 +65,7 @@ test('unist-util-find-before', function (t) {
 
   t.throws(
     function () {
+      // @ts-ignore runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, true)
     },
     /Expected function, string, or object as test/,
@@ -154,7 +161,11 @@ test('unist-util-find-before', function (t) {
     'should return a child when given a `test` and existing (#4)'
   )
 
-  function test(node, n) {
+  /**
+   * @param {Node} _
+   * @param {number} n
+   */
+  function test(_, n) {
     return n === 3
   }
 
