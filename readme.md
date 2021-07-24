@@ -27,7 +27,7 @@ npm install unist-util-find-before
 import {u} from 'unist-builder'
 import {findBefore} from 'unist-util-find-before'
 
-var tree = u('tree', [
+const tree = u('tree', [
   u('leaf', 'leaf 1'),
   u('node', [u('leaf', 'leaf 2'), u('leaf', 'leaf 3')]),
   u('leaf', 'leaf 4'),
@@ -37,7 +37,7 @@ var tree = u('tree', [
   u('leaf', 'leaf 7')
 ])
 
-var empty = tree.children[5]
+const empty = tree.children[5]
 
 console.log(findBefore(tree, empty, 'node'))
 ```

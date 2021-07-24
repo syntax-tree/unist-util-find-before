@@ -8,21 +8,21 @@ import test from 'tape'
 import remark from 'remark'
 import {findBefore} from './index.js'
 
-test('unist-util-find-before', function (t) {
+test('unist-util-find-before', (t) => {
   /** @type {Root} */
   // @ts-expect-error: fine.
-  var tree = remark().parse('Some *emphasis*, **importance**, and `code`.')
+  const tree = remark().parse('Some *emphasis*, **importance**, and `code`.')
 
   assert(tree.type === 'root')
-  var paragraph = tree.children[0]
+  const paragraph = tree.children[0]
   assert(paragraph.type === 'paragraph')
-  var head = paragraph.children[0]
+  const head = paragraph.children[0]
   assert(head.type === 'text')
-  var next = paragraph.children[1]
+  const next = paragraph.children[1]
   assert(next.type === 'emphasis')
 
   t.throws(
-    function () {
+    () => {
       // @ts-ignore runtime
       findBefore()
     },
@@ -31,7 +31,7 @@ test('unist-util-find-before', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       // @ts-ignore runtime
       findBefore({type: 'foo'})
     },
@@ -40,7 +40,7 @@ test('unist-util-find-before', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       // @ts-ignore runtime
       findBefore({type: 'foo', children: []})
     },
@@ -49,7 +49,7 @@ test('unist-util-find-before', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       findBefore({type: 'foo', children: []}, -1)
     },
     /Expected positive finite number as index/,
@@ -57,7 +57,7 @@ test('unist-util-find-before', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       findBefore({type: 'foo', children: []}, {type: 'bar'})
     },
     /Expected child node or index/,
@@ -65,7 +65,7 @@ test('unist-util-find-before', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       // @ts-ignore runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, false)
     },
@@ -74,7 +74,7 @@ test('unist-util-find-before', function (t) {
   )
 
   t.throws(
-    function () {
+    () => {
       // @ts-ignore runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, true)
     },
