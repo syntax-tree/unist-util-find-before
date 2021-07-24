@@ -1,16 +1,26 @@
 /**
  * @typedef {import('unist').Node} Node
+ * @typedef {import('mdast').Root} Root
  */
 
+import assert from 'node:assert'
 import test from 'tape'
 import remark from 'remark'
 import {findBefore} from './index.js'
 
-var tree = remark().parse('Some *emphasis*, **importance**, and `code`.')
-var paragraph = tree.children[0]
-var children = paragraph.children
-
 test('unist-util-find-before', function (t) {
+  /** @type {Root} */
+  // @ts-expect-error: fine.
+  var tree = remark().parse('Some *emphasis*, **importance**, and `code`.')
+
+  assert(tree.type === 'root')
+  var paragraph = tree.children[0]
+  assert(paragraph.type === 'paragraph')
+  var head = paragraph.children[0]
+  assert(head.type === 'text')
+  var next = paragraph.children[1]
+  assert(next.type === 'emphasis')
+
   t.throws(
     function () {
       // @ts-ignore runtime
@@ -73,13 +83,13 @@ test('unist-util-find-before', function (t) {
   )
 
   t.strictEqual(
-    findBefore(paragraph, children[1]),
-    children[0],
+    findBefore(paragraph, paragraph.children[1]),
+    head,
     'should return the preceding node when without `test` (#1)'
   )
   t.strictEqual(
     findBefore(paragraph, 1),
-    children[0],
+    head,
     'should return the preceding node when without `test` (#2)'
   )
   t.strictEqual(
@@ -89,39 +99,39 @@ test('unist-util-find-before', function (t) {
   )
 
   t.strictEqual(
-    findBefore(paragraph, 100, children[0]),
-    children[0],
+    findBefore(paragraph, 100, head),
+    head,
     'should return `node` when given a `node` and existing (#1)'
   )
   t.strictEqual(
-    findBefore(paragraph, children[1], children[0]),
-    children[0],
+    findBefore(paragraph, paragraph.children[1], head),
+    head,
     'should return `node` when given a `node` and existing (#2)'
   )
   t.strictEqual(
-    findBefore(paragraph, 1, children[0]),
-    children[0],
+    findBefore(paragraph, 1, head),
+    head,
     'should return `node` when given a `node` and existing (#3)'
   )
   t.strictEqual(
-    findBefore(paragraph, children[0], children[0]),
+    findBefore(paragraph, head, head),
     null,
     'should return `node` when given a `node` and existing (#4)'
   )
   t.strictEqual(
-    findBefore(paragraph, 0, children[0]),
+    findBefore(paragraph, 0, head),
     null,
     'should return `node` when given a `node` and existing (#5)'
   )
   t.strictEqual(
-    findBefore(paragraph, 1, children[1]),
+    findBefore(paragraph, 1, next),
     null,
     'should return `node` when given a `node` and existing (#6)'
   )
 
   t.strictEqual(
     findBefore(paragraph, 100, 'strong'),
-    children[3],
+    paragraph.children[3],
     'should return a child when given a `type` and existing (#1)'
   )
   t.strictEqual(
@@ -130,19 +140,19 @@ test('unist-util-find-before', function (t) {
     'should return a child when given a `type` and existing (#2)'
   )
   t.strictEqual(
-    findBefore(paragraph, children[4], 'strong'),
-    children[3],
+    findBefore(paragraph, paragraph.children[4], 'strong'),
+    paragraph.children[3],
     'should return a child when given a `type` and existing (#3)'
   )
   t.strictEqual(
-    findBefore(paragraph, children[3], 'strong'),
+    findBefore(paragraph, paragraph.children[3], 'strong'),
     null,
     'should return a child when given a `type` and existing (#4)'
   )
 
   t.strictEqual(
     findBefore(paragraph, 100, test),
-    children[3],
+    paragraph.children[3],
     'should return a child when given a `test` and existing (#1)'
   )
   t.strictEqual(
@@ -151,12 +161,12 @@ test('unist-util-find-before', function (t) {
     'should return a child when given a `test` and existing (#2)'
   )
   t.strictEqual(
-    findBefore(paragraph, children[4], test),
-    children[3],
+    findBefore(paragraph, paragraph.children[4], test),
+    paragraph.children[3],
     'should return a child when given a `test` and existing (#3)'
   )
   t.strictEqual(
-    findBefore(paragraph, children[3], test),
+    findBefore(paragraph, paragraph.children[3], test),
     null,
     'should return a child when given a `test` and existing (#4)'
   )
