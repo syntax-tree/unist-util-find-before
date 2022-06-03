@@ -5,7 +5,7 @@
 
 import assert from 'node:assert'
 import test from 'tape'
-import remark from 'remark'
+import {remark} from 'remark'
 import {findBefore} from './index.js'
 
 test('unist-util-find-before', (t) => {
