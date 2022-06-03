@@ -92,7 +92,7 @@ There is no default export.
 
 ### `findBefore(parent, node|index[, test])`
 
-Find the first node in `parent` ([`Parent`][parent]) before another node
+Find the first node in `parent` ([`Parent`][parent]) before another `node`
 ([`Node`][node]) or before an index, that passes `test` (`Test` from
 [`unist-util-is`][test]).
 
