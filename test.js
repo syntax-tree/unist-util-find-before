@@ -1,6 +1,5 @@
 /**
  * @typedef {import('unist').Node} Node
- * @typedef {import('mdast').Root} Root
  */
 
 import assert from 'node:assert'
@@ -9,8 +8,6 @@ import {remark} from 'remark'
 import {findBefore} from './index.js'
 
 test('unist-util-find-before', (t) => {
-  /** @type {Root} */
-  // @ts-expect-error: fine.
   const tree = remark().parse('Some *emphasis*, **importance**, and `code`.')
 
   assert(tree.type === 'root')
@@ -23,7 +20,7 @@ test('unist-util-find-before', (t) => {
 
   t.throws(
     () => {
-      // @ts-ignore runtime
+      // @ts-expect-error runtime
       findBefore()
     },
     /Expected parent node/,
@@ -32,7 +29,7 @@ test('unist-util-find-before', (t) => {
 
   t.throws(
     () => {
-      // @ts-ignore runtime
+      // @ts-expect-error runtime
       findBefore({type: 'foo'})
     },
     /Expected parent node/,
@@ -41,7 +38,7 @@ test('unist-util-find-before', (t) => {
 
   t.throws(
     () => {
-      // @ts-ignore runtime
+      // @ts-expect-error runtime
       findBefore({type: 'foo', children: []})
     },
     /Expected child node or index/,
@@ -66,7 +63,7 @@ test('unist-util-find-before', (t) => {
 
   t.throws(
     () => {
-      // @ts-ignore runtime
+      // @ts-expect-error runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, false)
     },
     /Expected function, string, or object as test/,
@@ -75,7 +72,7 @@ test('unist-util-find-before', (t) => {
 
   t.throws(
     () => {
-      // @ts-ignore runtime
+      // @ts-expect-error runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, true)
     },
     /Expected function, string, or object as test/,
