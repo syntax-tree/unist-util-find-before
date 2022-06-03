@@ -4,11 +4,11 @@
 
 import assert from 'node:assert'
 import test from 'tape'
-import {remark} from 'remark'
+import {fromMarkdown} from 'mdast-util-from-markdown'
 import {findBefore} from './index.js'
 
-test('unist-util-find-before', (t) => {
-  const tree = remark().parse('Some *emphasis*, **importance**, and `code`.')
+test('`findBefore`', (t) => {
+  const tree = fromMarkdown('Some *emphasis*, **importance**, and `code`.')
 
   assert(tree.type === 'root')
   const paragraph = tree.children[0]
