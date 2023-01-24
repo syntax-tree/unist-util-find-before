@@ -2,12 +2,12 @@
  * @typedef {import('unist').Node} Node
  */
 
-import assert from 'node:assert'
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {fromMarkdown} from 'mdast-util-from-markdown'
 import {findBefore} from './index.js'
 
-test('`findBefore`', (t) => {
+test('`findBefore`', () => {
   const tree = fromMarkdown('Some *emphasis*, **importance**, and `code`.')
 
   assert(tree.type === 'root')
@@ -18,7 +18,7 @@ test('`findBefore`', (t) => {
   const next = paragraph.children[1]
   assert(next.type === 'emphasis')
 
-  t.throws(
+  assert.throws(
     () => {
       // @ts-expect-error runtime
       findBefore()
@@ -27,7 +27,7 @@ test('`findBefore`', (t) => {
     'should fail without parent'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       // @ts-expect-error runtime
       findBefore({type: 'foo'})
@@ -36,7 +36,7 @@ test('`findBefore`', (t) => {
     'should fail without parent node'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       // @ts-expect-error runtime
       findBefore({type: 'foo', children: []})
@@ -45,7 +45,7 @@ test('`findBefore`', (t) => {
     'should fail without index (#1)'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       findBefore({type: 'foo', children: []}, -1)
     },
@@ -53,7 +53,7 @@ test('`findBefore`', (t) => {
     'should fail without index (#2)'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       findBefore({type: 'foo', children: []}, {type: 'bar'})
     },
@@ -61,7 +61,7 @@ test('`findBefore`', (t) => {
     'should fail without index (#3)'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       // @ts-expect-error runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, false)
@@ -70,7 +70,7 @@ test('`findBefore`', (t) => {
     'should fail for invalid `test` (#1)'
   )
 
-  t.throws(
+  assert.throws(
     () => {
       // @ts-expect-error runtime
       findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, true)
@@ -79,102 +79,100 @@ test('`findBefore`', (t) => {
     'should fail for invalid `test` (#2)'
   )
 
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, paragraph.children[1]),
     head,
     'should return the preceding node when without `test` (#1)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 1),
     head,
     'should return the preceding node when without `test` (#2)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 0),
     null,
     'should return the preceding node when without `test` (#3)'
   )
 
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 100, head),
     head,
     'should return `node` when given a `node` and existing (#1)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, paragraph.children[1], head),
     head,
     'should return `node` when given a `node` and existing (#2)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 1, head),
     head,
     'should return `node` when given a `node` and existing (#3)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, head, head),
     null,
     'should return `node` when given a `node` and existing (#4)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 0, head),
     null,
     'should return `node` when given a `node` and existing (#5)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 1, next),
     null,
     'should return `node` when given a `node` and existing (#6)'
   )
 
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 100, 'strong'),
     paragraph.children[3],
     'should return a child when given a `type` and existing (#1)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, 3, 'strong'),
     null,
     'should return a child when given a `type` and existing (#2)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, paragraph.children[4], 'strong'),
     paragraph.children[3],
     'should return a child when given a `type` and existing (#3)'
   )
-  t.strictEqual(
+  assert.strictEqual(
     findBefore(paragraph, paragraph.children[3], 'strong'),
     null,
     'should return a child when given a `type` and existing (#4)'
   )
 
-  t.strictEqual(
-    findBefore(paragraph, 100, test),
+  assert.strictEqual(
+    findBefore(paragraph, 100, check),
     paragraph.children[3],
     'should return a child when given a `test` and existing (#1)'
   )
-  t.strictEqual(
-    findBefore(paragraph, 3, test),
+  assert.strictEqual(
+    findBefore(paragraph, 3, check),
     null,
     'should return a child when given a `test` and existing (#2)'
   )
-  t.strictEqual(
-    findBefore(paragraph, paragraph.children[4], test),
+  assert.strictEqual(
+    findBefore(paragraph, paragraph.children[4], check),
     paragraph.children[3],
     'should return a child when given a `test` and existing (#3)'
   )
-  t.strictEqual(
-    findBefore(paragraph, paragraph.children[3], test),
+  assert.strictEqual(
+    findBefore(paragraph, paragraph.children[3], check),
     null,
     'should return a child when given a `test` and existing (#4)'
   )
 
   /**
    * @param {Node} _
-   * @param {number} n
+   * @param {number | null | undefined} n
    */
-  function test(_, n) {
+  function check(_, n) {
     return n === 3
   }
-
-  t.end()
 })
