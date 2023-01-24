@@ -38,7 +38,7 @@ But this helps when integrating with the rest of unified and unist.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, 16.0+, 18.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install unist-util-find-before
@@ -47,14 +47,14 @@ npm install unist-util-find-before
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {findBefore} from "https://esm.sh/unist-util-find-before@3"
+import {findBefore} from 'https://esm.sh/unist-util-find-before@3'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {findBefore} from "https://esm.sh/unist-util-find-before@3?bundle"
+  import {findBefore} from 'https://esm.sh/unist-util-find-before@3?bundle'
 </script>
 ```
 
@@ -87,18 +87,28 @@ Yields:
 
 ## API
 
-This package exports the identifier `findBefore`.
+This package exports the identifier [`findBefore`][api-findbefore].
 There is no default export.
 
 ### `findBefore(parent, node|index[, test])`
 
-Find the first node in `parent` ([`Parent`][parent]) before another `node`
-([`Node`][node]) or before an index, that passes `test` (`Test` from
-[`unist-util-is`][test]).
+Find the first node in `parent` before another `node` or before an index,
+that passes `test`.
+
+###### Parameters
+
+*   `parent` ([`Node`][node])
+    — parent node
+*   `index` (`number`)
+    — index of child in `parent`
+*   `child` ([`Node`][node])
+    — child in `parent`
+*   `test` ([`Test`][test])
+    — `unist-util-is`-compatible test
 
 ###### Returns
 
-Child of `parent` that passes `test`, if found ([`Node?`][node]).
+Child of `parent` ([`Node`][node]) or `null`.
 
 ## Types
 
@@ -109,7 +119,7 @@ It exports no additional types (types for the test are in `unist-util-is`).
 
 Projects maintained by the unified collective are compatible with all maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+As of now, that is Node.js 14.14+ and 16.0+.
 Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Related
@@ -203,6 +213,6 @@ abide by its terms.
 
 [node]: https://github.com/syntax-tree/unist#node
 
-[parent]: https://github.com/syntax-tree/unist#parent-1
-
 [test]: https://github.com/syntax-tree/unist-util-is#test
+
+[api-findbefore]: #findbeforeparent-nodeindex-test
