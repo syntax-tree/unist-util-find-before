@@ -5,9 +5,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {fromMarkdown} from 'mdast-util-from-markdown'
-import {findBefore} from './index.js'
+import {findBefore} from 'unist-util-find-before'
 
 test('`findBefore`', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('unist-util-find-before')).sort(),
+      ['findBefore']
+    )
+  })
+
   const tree = fromMarkdown('Some *emphasis*, **importance**, and `code`.')
 
   assert(tree.type === 'root')
