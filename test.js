@@ -89,7 +89,7 @@ test('`findBefore`', async function (t) {
   await t.test(
     'should return the preceding node when without `test` (#3)',
     async function () {
-      assert.equal(findBefore(paragraph, 0), null)
+      assert.equal(findBefore(paragraph, 0), undefined)
     }
   )
 
@@ -117,21 +117,21 @@ test('`findBefore`', async function (t) {
   await t.test(
     'should return `node` when given a `node` and existing (#4)',
     async function () {
-      assert.equal(findBefore(paragraph, head, head), null)
+      assert.equal(findBefore(paragraph, head, head), undefined)
     }
   )
 
   await t.test(
     'should return `node` when given a `node` and existing (#5)',
     async function () {
-      assert.equal(findBefore(paragraph, 0, head), null)
+      assert.equal(findBefore(paragraph, 0, head), undefined)
     }
   )
 
   await t.test(
     'should return `node` when given a `node` and existing (#6)',
     async function () {
-      assert.equal(findBefore(paragraph, 1, next), null)
+      assert.equal(findBefore(paragraph, 1, next), undefined)
     }
   )
 
@@ -145,7 +145,7 @@ test('`findBefore`', async function (t) {
   await t.test(
     'should return a child when given a `type` and existing (#2)',
     async function () {
-      assert.equal(findBefore(paragraph, 3, 'strong'), null)
+      assert.equal(findBefore(paragraph, 3, 'strong'), undefined)
     }
   )
 
@@ -162,7 +162,10 @@ test('`findBefore`', async function (t) {
   await t.test(
     'should return a child when given a `type` and existing (#4)',
     async function () {
-      assert.equal(findBefore(paragraph, paragraph.children[3], 'strong'), null)
+      assert.equal(
+        findBefore(paragraph, paragraph.children[3], 'strong'),
+        undefined
+      )
     }
   )
 
@@ -176,7 +179,7 @@ test('`findBefore`', async function (t) {
   await t.test(
     'should return a child when given a `test` and existing (#2)',
     async function () {
-      assert.equal(findBefore(paragraph, 3, check), null)
+      assert.equal(findBefore(paragraph, 3, check), undefined)
     }
   )
 
@@ -193,7 +196,10 @@ test('`findBefore`', async function (t) {
   await t.test(
     'should return a child when given a `test` and existing (#4)',
     async function () {
-      assert.equal(findBefore(paragraph, paragraph.children[3], check), null)
+      assert.equal(
+        findBefore(paragraph, paragraph.children[3], check),
+        undefined
+      )
     }
   )
 })

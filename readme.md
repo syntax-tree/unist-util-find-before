@@ -108,7 +108,7 @@ that passes `test`.
 
 ###### Returns
 
-Child of `parent` ([`Node`][node]) or `null`.
+Child of `parent` ([`Node`][node]) or `undefined`.
 
 ## Types
 
