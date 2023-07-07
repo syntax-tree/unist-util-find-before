@@ -1,5 +1,7 @@
 /**
- * @typedef {import('unist').Node} Node
+ * @typedef {import('mdast').Emphasis} Emphasis
+ * @typedef {import('mdast').InlineCode} InlineCode
+ * @typedef {import('unist').Node} UnistNode
  */
 
 import assert from 'node:assert/strict'
@@ -25,6 +27,11 @@ test('`findBefore`', async function (t) {
   const next = paragraph.children[1]
   assert(next.type === 'emphasis')
 
+  /** @type {Emphasis} */
+  const emphasis = {type: 'emphasis', children: []}
+  /** @type {InlineCode} */
+  const inlineCode = {type: 'inlineCode', value: 'a'}
+
   await t.test('should fail without parent', async function () {
     assert.throws(function () {
       // @ts-expect-error: check that an error is thrown at runtime.
@@ -35,40 +42,40 @@ test('`findBefore`', async function (t) {
   await t.test('should fail without parent node', async function () {
     assert.throws(function () {
       // @ts-expect-error: check that an error is thrown at runtime.
-      findBefore({type: 'foo'})
+      findBefore(inlineCode)
     }, /Expected parent node/)
   })
 
   await t.test('should fail without index (#1)', async function () {
     assert.throws(function () {
       // @ts-expect-error: check that an error is thrown at runtime.
-      findBefore({type: 'foo', children: []})
+      findBefore(emphasis)
     }, /Expected child node or index/)
   })
 
   await t.test('should fail without index (#2)', async function () {
     assert.throws(function () {
-      findBefore({type: 'foo', children: []}, -1)
+      findBefore(emphasis, -1)
     }, /Expected positive finite number as index/)
   })
 
   await t.test('should fail without index (#3)', async function () {
     assert.throws(function () {
-      findBefore({type: 'foo', children: []}, {type: 'bar'})
+      findBefore(emphasis, inlineCode)
     }, /Expected child node or index/)
   })
 
   await t.test('should fail for invalid `test` (#1)', async function () {
     assert.throws(function () {
       // @ts-expect-error: check that an error is thrown at runtime.
-      findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, false)
+      findBefore(emphasis, 1, false)
     }, /Expected function, string, or object as test/)
   })
 
   await t.test('should fail for invalid `test` (#2)', async function () {
     assert.throws(function () {
       // @ts-expect-error: check that an error is thrown at runtime.
-      findBefore({type: 'foo', children: [{type: 'bar'}]}, 1, true)
+      findBefore(emphasis, 1, true)
     }, /Expected function, string, or object as test/)
   })
 
@@ -205,8 +212,8 @@ test('`findBefore`', async function (t) {
 })
 
 /**
- * @param {Node} _
- * @param {number | null | undefined} n
+ * @param {UnistNode} _
+ * @param {number | undefined} n
  */
 function check(_, n) {
   return n === 3
