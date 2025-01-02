@@ -1,7 +1,6 @@
 /**
- * @typedef {import('mdast').Emphasis} Emphasis
- * @typedef {import('mdast').InlineCode} InlineCode
- * @typedef {import('unist').Node} UnistNode
+ * @import {Emphasis, InlineCode} from 'mdast'
+ * @import {Node as UnistNode} from 'unist'
  */
 
 import assert from 'node:assert/strict'
