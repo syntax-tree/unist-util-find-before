@@ -12,17 +12,17 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`findBefore(parent, node|index[, test])`](#findbeforeparent-nodeindex-test)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Related](#related)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`findBefore(parent, node|index[, test])`](#findbeforeparent-nodeindex-test)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Related](#related)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -97,14 +97,14 @@ that passes `test`.
 
 ###### Parameters
 
-*   `parent` ([`Node`][node])
-    — parent node
-*   `index` (`number`)
-    — index of child in `parent`
-*   `child` ([`Node`][node])
-    — child in `parent`
-*   `test` ([`Test`][test])
-    — `unist-util-is`-compatible test
+* `parent` ([`Node`][node])
+  — parent node
+* `index` (`number`)
+  — index of child in `parent`
+* `child` ([`Node`][node])
+  — child in `parent`
+* `test` ([`Test`][test])
+  — `unist-util-is`-compatible test
 
 ###### Returns
 
@@ -127,28 +127,28 @@ compatible with Node.js 16.
 
 ## Related
 
-*   [`unist-util-find-after`](https://github.com/syntax-tree/unist-util-find-after)
-    — find a node after another node
-*   [`unist-util-find-all-after`](https://github.com/syntax-tree/unist-util-find-all-after)
-    — find all nodes after another node
-*   [`unist-util-find-all-before`](https://github.com/syntax-tree/unist-util-find-all-before)
-    — find all nodes before another node
-*   [`unist-util-find-all-between`](https://github.com/mrzmmr/unist-util-find-all-between)
-    — find all nodes between two nodes
-*   [`unist-util-visit`](https://github.com/syntax-tree/unist-util-visit)
-    — walk the tree
-*   [`unist-util-visit-parents`](https://github.com/syntax-tree/unist-util-visit-parents)
-    — walk the tree with a stack of parents
-*   [`unist-util-filter`](https://github.com/syntax-tree/unist-util-filter)
-    — create a new tree with all nodes that pass a test
-*   [`unist-util-map`](https://github.com/syntax-tree/unist-util-map)
-    — create a new tree with all nodes mapped by a given function
-*   [`unist-util-flatmap`](https://gitlab.com/staltz/unist-util-flatmap)
-    — create a new tree by mapping (to an array) by a given function
-*   [`unist-util-remove`](https://github.com/syntax-tree/unist-util-remove)
-    — remove nodes from a tree that pass a test
-*   [`unist-util-select`](https://github.com/syntax-tree/unist-util-select)
-    — select nodes with CSS-like selectors
+* [`unist-util-find-after`](https://github.com/syntax-tree/unist-util-find-after)
+  — find a node after another node
+* [`unist-util-find-all-after`](https://github.com/syntax-tree/unist-util-find-all-after)
+  — find all nodes after another node
+* [`unist-util-find-all-before`](https://github.com/syntax-tree/unist-util-find-all-before)
+  — find all nodes before another node
+* [`unist-util-find-all-between`](https://github.com/mrzmmr/unist-util-find-all-between)
+  — find all nodes between two nodes
+* [`unist-util-visit`](https://github.com/syntax-tree/unist-util-visit)
+  — walk the tree
+* [`unist-util-visit-parents`](https://github.com/syntax-tree/unist-util-visit-parents)
+  — walk the tree with a stack of parents
+* [`unist-util-filter`](https://github.com/syntax-tree/unist-util-filter)
+  — create a new tree with all nodes that pass a test
+* [`unist-util-map`](https://github.com/syntax-tree/unist-util-map)
+  — create a new tree with all nodes mapped by a given function
+* [`unist-util-flatmap`](https://gitlab.com/staltz/unist-util-flatmap)
+  — create a new tree by mapping (to an array) by a given function
+* [`unist-util-remove`](https://github.com/syntax-tree/unist-util-remove)
+  — remove nodes from a tree that pass a test
+* [`unist-util-select`](https://github.com/syntax-tree/unist-util-select)
+  — select nodes with CSS-like selectors
 
 ## Contribute
 
